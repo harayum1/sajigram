@@ -26,6 +26,7 @@
   --butter: #F2D98B;
   --butter-light: #FFF3D1;
   --white: #FFFFFF;
+  --heart: #E25555;
   --shadow-soft: 0 2px 12px rgba(58, 54, 50, 0.08);
   --shadow-medium: 0 4px 20px rgba(58, 54, 50, 0.12);
   --shadow-lifted: 0 8px 32px rgba(58, 54, 50, 0.16);
@@ -50,12 +51,11 @@ body {
   position: relative;
 }
 
-/* Background texture */
 body::before {
   content: '';
   position: fixed;
   inset: 0;
-  background: 
+  background:
     radial-gradient(ellipse at 20% 0%, rgba(196, 112, 75, 0.06) 0%, transparent 50%),
     radial-gradient(ellipse at 80% 100%, rgba(122, 139, 92, 0.06) 0%, transparent 50%);
   pointer-events: none;
@@ -122,13 +122,8 @@ body::before {
 }
 
 /* ── Ingredient Search ── */
-.search-section {
-  margin-bottom: 20px;
-}
-
-.search-box {
-  position: relative;
-}
+.search-section { margin-bottom: 20px; }
+.search-box { position: relative; }
 
 .search-input {
   width: 100%;
@@ -146,10 +141,7 @@ body::before {
   -webkit-appearance: none;
 }
 
-.search-input::placeholder {
-  color: var(--warm-gray-light);
-  font-weight: 300;
-}
+.search-input::placeholder { color: var(--warm-gray-light); font-weight: 300; }
 
 .search-input:focus {
   border-color: var(--terracotta);
@@ -167,9 +159,7 @@ body::before {
   transition: opacity 0.3s;
 }
 
-.search-input:focus ~ .search-icon {
-  opacity: 0.7;
-}
+.search-input:focus ~ .search-icon { opacity: 0.7; }
 
 .search-clear {
   position: absolute;
@@ -235,14 +225,41 @@ body::before {
   box-shadow: 0 2px 8px rgba(58, 54, 50, 0.2);
 }
 
-/* ── Ingredient Grid ── */
+/* ── Ingredient Sections ── */
+.ingredient-section {
+  margin-bottom: 24px;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 10px;
+  padding: 0 2px;
+}
+
+.section-emoji { font-size: 1.1rem; }
+
+.section-title {
+  font-family: 'Zen Maru Gothic', sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--charcoal);
+}
+
+.section-count {
+  font-size: 0.7rem;
+  color: var(--warm-gray-light);
+  margin-left: auto;
+}
+
 .ingredient-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 10px;
-  margin-top: 16px;
 }
 
+/* ── Ingredient Card ── */
 .ingredient-card {
   background: var(--white);
   border-radius: var(--radius-md);
@@ -266,9 +283,7 @@ body::before {
   transition: opacity 0.3s;
 }
 
-.ingredient-card:active {
-  transform: scale(0.97);
-}
+.ingredient-card:active { transform: scale(0.97); }
 
 .ingredient-card.selected {
   border-color: var(--terracotta);
@@ -277,11 +292,7 @@ body::before {
 
 .ingredient-card.selected::after { opacity: 1; }
 
-.card-emoji {
-  font-size: 1.5rem;
-  margin-bottom: 6px;
-  display: block;
-}
+.card-emoji { font-size: 1.5rem; margin-bottom: 6px; display: block; }
 
 .card-name {
   font-family: 'Zen Maru Gothic', sans-serif;
@@ -297,6 +308,30 @@ body::before {
   margin-top: 2px;
 }
 
+/* ── Favorite Button (Card) ── */
+.fav-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 2;
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: transparent;
+  font-size: 1rem;
+  color: var(--warm-gray-light);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s;
+  line-height: 1;
+}
+
+.fav-btn:active { transform: scale(0.85); }
+.fav-btn.active { color: var(--heart); }
+
 /* ── Result Panel (Bottom Sheet Style) ── */
 .result-panel {
   position: fixed;
@@ -308,9 +343,7 @@ body::before {
   transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.result-panel.visible {
-  transform: translateY(0);
-}
+.result-panel.visible { transform: translateY(0); }
 
 .result-inner {
   max-width: 480px;
@@ -342,9 +375,7 @@ body::before {
   gap: 10px;
 }
 
-.result-emoji {
-  font-size: 1.8rem;
-}
+.result-emoji { font-size: 1.8rem; }
 
 .result-name {
   font-family: 'Zen Maru Gothic', sans-serif;
@@ -352,6 +383,30 @@ body::before {
   font-size: 1.1rem;
   color: var(--charcoal);
 }
+
+.result-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.result-fav {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--warm-cream);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  color: var(--warm-gray-light);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.result-fav:active { transform: scale(0.9); }
+.result-fav.active { color: var(--heart); background: #fdeaea; }
 
 .result-close {
   width: 32px;
@@ -371,11 +426,7 @@ body::before {
 .result-close:active { background: var(--warm-cream-dark); }
 
 /* Spoon Selector */
-.spoon-selector {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 20px;
-}
+.spoon-selector { display: flex; gap: 8px; margin-bottom: 20px; }
 
 .spoon-btn {
   flex: 1;
@@ -445,20 +496,10 @@ body::before {
   font-weight: 700;
 }
 
-.qty-btn:active {
-  transform: scale(0.9);
-  background: var(--warm-cream-dark);
-}
+.qty-btn:active { transform: scale(0.9); background: var(--warm-cream-dark); }
+.qty-btn:disabled { opacity: 0.3; cursor: default; }
 
-.qty-btn:disabled {
-  opacity: 0.3;
-  cursor: default;
-}
-
-.qty-display {
-  min-width: 60px;
-  text-align: center;
-}
+.qty-display { min-width: 60px; text-align: center; }
 
 .qty-number {
   font-family: 'Zen Maru Gothic', sans-serif;
@@ -488,10 +529,8 @@ body::before {
 .gram-result::before {
   content: '';
   position: absolute;
-  top: -20px;
-  right: -20px;
-  width: 80px;
-  height: 80px;
+  top: -20px; right: -20px;
+  width: 80px; height: 80px;
   background: rgba(255,255,255,0.1);
   border-radius: 50%;
 }
@@ -499,10 +538,8 @@ body::before {
 .gram-result::after {
   content: '';
   position: absolute;
-  bottom: -10px;
-  left: -10px;
-  width: 50px;
-  height: 50px;
+  bottom: -10px; left: -10px;
+  width: 50px; height: 50px;
   background: rgba(255,255,255,0.06);
   border-radius: 50%;
 }
@@ -525,11 +562,7 @@ body::before {
   z-index: 1;
 }
 
-.gram-value span {
-  font-size: 1.2rem;
-  font-weight: 700;
-  margin-left: 4px;
-}
+.gram-value span { font-size: 1.2rem; font-weight: 700; margin-left: 4px; }
 
 .gram-note {
   font-size: 0.7rem;
@@ -550,28 +583,12 @@ body::before {
   transition: opacity 0.3s;
 }
 
-.backdrop.visible {
-  opacity: 1;
-  pointer-events: auto;
-}
+.backdrop.visible { opacity: 1; pointer-events: auto; }
 
 /* ── Empty state ── */
-.empty-state {
-  text-align: center;
-  padding: 40px 20px;
-  color: var(--warm-gray-light);
-}
-
-.empty-state .empty-icon {
-  font-size: 2.5rem;
-  margin-bottom: 12px;
-  opacity: 0.6;
-}
-
-.empty-state p {
-  font-size: 0.85rem;
-  line-height: 1.6;
-}
+.empty-state { text-align: center; padding: 40px 20px; color: var(--warm-gray-light); }
+.empty-state .empty-icon { font-size: 2.5rem; margin-bottom: 12px; opacity: 0.6; }
+.empty-state p { font-size: 0.85rem; line-height: 1.6; }
 
 /* ── Animations ── */
 @keyframes fadeInUp {
@@ -594,20 +611,15 @@ body::before {
 .ingredient-card:nth-child(9) { animation-delay: 0.18s; }
 .ingredient-card:nth-child(10) { animation-delay: 0.20s; }
 
-/* Pulse animation for gram result */
 @keyframes pulse {
   0%, 100% { transform: scale(1); }
   50% { transform: scale(1.03); }
 }
 
-.gram-result.pulse {
-  animation: pulse 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
+.gram-result.pulse { animation: pulse 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
 
-/* ── Scrollbar ── */
 ::-webkit-scrollbar { width: 0; height: 0; }
 
-/* ── Desktop centering ── */
 @media (min-width: 520px) {
   .main { padding-left: 24px; padding-right: 24px; }
 }
@@ -630,12 +642,11 @@ body::before {
       <span class="search-icon">🔍</span>
       <button class="search-clear" id="searchClear" aria-label="クリア">✕</button>
     </div>
-    <!-- Category Chips -->
     <div class="category-scroll" id="categoryScroll"></div>
   </div>
 
-  <!-- Ingredient Grid -->
-  <div class="ingredient-grid" id="ingredientGrid"></div>
+  <!-- Ingredient Sections -->
+  <div id="ingredientSections"></div>
 
   <!-- Empty State -->
   <div class="empty-state" id="emptyState" style="display:none;">
@@ -656,7 +667,10 @@ body::before {
         <span class="result-emoji" id="resultEmoji"></span>
         <span class="result-name" id="resultName"></span>
       </div>
-      <button class="result-close" id="resultClose" aria-label="閉じる">✕</button>
+      <div class="result-actions">
+        <button class="result-fav" id="resultFav" aria-label="お気に入り">♡</button>
+        <button class="result-close" id="resultClose" aria-label="閉じる">✕</button>
+      </div>
     </div>
 
     <!-- Spoon Size -->
@@ -695,88 +709,443 @@ body::before {
 </div>
 
 <script>
-// ── Ingredient Database ──
-// tablespoon = 大さじ1 (15ml) のグラム数
-// teaspoon = 小さじ1 (5ml) のグラム数
-// mediumspoon = 中さじ1 (10ml) は大さじと小さじから算出
-const ingredients = [
-  // 基本調味料
-  { name: '砂糖（上白糖）', emoji: '🍬', category: '基本調味料', tablespoon: 9, teaspoon: 3 },
-  { name: 'グラニュー糖', emoji: '✨', category: '基本調味料', tablespoon: 12, teaspoon: 4 },
-  { name: '塩', emoji: '🧂', category: '基本調味料', tablespoon: 18, teaspoon: 6 },
-  { name: '粗塩', emoji: '🧂', category: '基本調味料', tablespoon: 15, teaspoon: 5 },
-  { name: '醤油', emoji: '🫘', category: '基本調味料', tablespoon: 18, teaspoon: 6 },
-  { name: '味噌', emoji: '🍶', category: '基本調味料', tablespoon: 18, teaspoon: 6 },
-  { name: '酢', emoji: '🍶', category: '基本調味料', tablespoon: 15, teaspoon: 5 },
-  { name: 'みりん', emoji: '🍶', category: '基本調味料', tablespoon: 18, teaspoon: 6 },
-  { name: '料理酒', emoji: '🍶', category: '基本調味料', tablespoon: 15, teaspoon: 5 },
-  { name: 'めんつゆ', emoji: '🍜', category: '基本調味料', tablespoon: 18, teaspoon: 6 },
-
-  // オイル・ソース
-  { name: 'サラダ油', emoji: '🫒', category: 'オイル・ソース', tablespoon: 12, teaspoon: 4 },
-  { name: 'オリーブオイル', emoji: '🫒', category: 'オイル・ソース', tablespoon: 12, teaspoon: 4 },
-  { name: 'ごま油', emoji: '🫒', category: 'オイル・ソース', tablespoon: 12, teaspoon: 4 },
-  { name: 'バター', emoji: '🧈', category: 'オイル・ソース', tablespoon: 12, teaspoon: 4 },
-  { name: 'マヨネーズ', emoji: '🥚', category: 'オイル・ソース', tablespoon: 12, teaspoon: 4 },
-  { name: 'ケチャップ', emoji: '🍅', category: 'オイル・ソース', tablespoon: 15, teaspoon: 5 },
-  { name: 'ソース（中濃）', emoji: '🥫', category: 'オイル・ソース', tablespoon: 18, teaspoon: 6 },
-  { name: 'ウスターソース', emoji: '🥫', category: 'オイル・ソース', tablespoon: 18, teaspoon: 6 },
-  { name: 'オイスターソース', emoji: '🦪', category: 'オイル・ソース', tablespoon: 18, teaspoon: 6 },
-  { name: 'ポン酢', emoji: '🍊', category: 'オイル・ソース', tablespoon: 18, teaspoon: 6 },
-
-  // 粉もの
-  { name: '薄力粉', emoji: '🌾', category: '粉もの', tablespoon: 9, teaspoon: 3 },
-  { name: '強力粉', emoji: '🌾', category: '粉もの', tablespoon: 9, teaspoon: 3 },
-  { name: '片栗粉', emoji: '🥔', category: '粉もの', tablespoon: 9, teaspoon: 3 },
-  { name: 'コーンスターチ', emoji: '🌽', category: '粉もの', tablespoon: 6, teaspoon: 2 },
-  { name: 'パン粉', emoji: '🍞', category: '粉もの', tablespoon: 3, teaspoon: 1 },
-  { name: 'ベーキングパウダー', emoji: '💨', category: '粉もの', tablespoon: 12, teaspoon: 4 },
-  { name: '重曹', emoji: '🧪', category: '粉もの', tablespoon: 12, teaspoon: 4 },
-  { name: 'ゼラチン（粉）', emoji: '🫧', category: '粉もの', tablespoon: 9, teaspoon: 3 },
-
-  // だし・スパイス
-  { name: '顆粒だし', emoji: '🐟', category: 'だし・スパイス', tablespoon: 9, teaspoon: 3 },
-  { name: '鶏がらスープの素', emoji: '🐔', category: 'だし・スパイス', tablespoon: 9, teaspoon: 3 },
-  { name: 'コンソメ（顆粒）', emoji: '🥣', category: 'だし・スパイス', tablespoon: 9, teaspoon: 3 },
-  { name: 'カレー粉', emoji: '🍛', category: 'だし・スパイス', tablespoon: 6, teaspoon: 2 },
-  { name: 'コショウ', emoji: '🌶️', category: 'だし・スパイス', tablespoon: 12, teaspoon: 4 },
-  { name: 'にんにく（チューブ）', emoji: '🧄', category: 'だし・スパイス', tablespoon: 15, teaspoon: 5 },
-  { name: 'しょうが（チューブ）', emoji: '🫚', category: 'だし・スパイス', tablespoon: 15, teaspoon: 5 },
-  { name: 'ナンプラー', emoji: '🐟', category: 'だし・スパイス', tablespoon: 18, teaspoon: 6 },
-  { name: '豆板醤', emoji: '🌶️', category: 'だし・スパイス', tablespoon: 18, teaspoon: 6 },
-  { name: 'コチュジャン', emoji: '🌶️', category: 'だし・スパイス', tablespoon: 18, teaspoon: 6 },
-
-  // その他
-  { name: 'はちみつ', emoji: '🍯', category: 'その他', tablespoon: 21, teaspoon: 7 },
-  { name: 'メープルシロップ', emoji: '🍁', category: 'その他', tablespoon: 21, teaspoon: 7 },
-  { name: '練乳', emoji: '🥛', category: 'その他', tablespoon: 21, teaspoon: 7 },
-  { name: '生クリーム', emoji: '🥛', category: 'その他', tablespoon: 15, teaspoon: 5 },
-  { name: '牛乳', emoji: '🥛', category: 'その他', tablespoon: 15, teaspoon: 5 },
-  { name: 'ヨーグルト', emoji: '🥛', category: 'その他', tablespoon: 15, teaspoon: 5 },
-  { name: 'ココアパウダー', emoji: '🍫', category: 'その他', tablespoon: 6, teaspoon: 2 },
-  { name: '抹茶パウダー', emoji: '🍵', category: 'その他', tablespoon: 6, teaspoon: 2 },
-  { name: 'すりごま', emoji: '🌰', category: 'その他', tablespoon: 6, teaspoon: 2 },
-  { name: 'いりごま', emoji: '🌰', category: 'その他', tablespoon: 9, teaspoon: 3 },
+// ══════════════════════════════════════════
+// ── Categories ──
+// ══════════════════════════════════════════
+const CATEGORIES = [
+  '基本調味料','油脂類','粉類','スパイス・ハーブ','乳製品',
+  '甘味料','ソース・ドレッシング','穀物・豆類','ナッツ・種子',
+  '乾物','エスニック・中華調味料','製菓材料','飲料・液体',
+  '生鮮食品','だし・スープの素','チューブ調味料','その他'
 ];
 
+// ══════════════════════════════════════════
+// ── Ingredient Database (310+ items) ──
+// tablespoon = 大さじ1 (15ml) g
+// teaspoon  = 小さじ1 (5ml)  g
+// ══════════════════════════════════════════
+const ingredients = [
+  // ─── 基本調味料 (21) ───
+  { name: '砂糖（上白糖）', emoji: '🍬', category: '基本調味料', tablespoon: 9, teaspoon: 3, aliases: ['さとう','砂糖','sugar','上白糖','じょうはくとう'], basic: true },
+  { name: 'グラニュー糖', emoji: '✨', category: '基本調味料', tablespoon: 12, teaspoon: 4, aliases: ['ぐらにゅーとう','granulated sugar'] },
+  { name: '三温糖', emoji: '🍬', category: '基本調味料', tablespoon: 9, teaspoon: 3, aliases: ['さんおんとう'] },
+  { name: '黒砂糖', emoji: '🍬', category: '基本調味料', tablespoon: 9, teaspoon: 3, aliases: ['くろざとう','黒糖','brown sugar'] },
+  { name: '粉糖', emoji: '✨', category: '基本調味料', tablespoon: 8, teaspoon: 3, aliases: ['ふんとう','粉砂糖','powdered sugar'] },
+  { name: '塩', emoji: '🧂', category: '基本調味料', tablespoon: 18, teaspoon: 6, aliases: ['しお','salt','食塩'], basic: true },
+  { name: '粗塩', emoji: '🧂', category: '基本調味料', tablespoon: 15, teaspoon: 5, aliases: ['あらしお','あらじお','coarse salt'] },
+  { name: '岩塩', emoji: '🧂', category: '基本調味料', tablespoon: 15, teaspoon: 5, aliases: ['がんえん','rock salt'] },
+  { name: '醤油', emoji: '🫘', category: '基本調味料', tablespoon: 18, teaspoon: 6, aliases: ['しょうゆ','ショウユ','soy sauce','しょう油'], basic: true },
+  { name: '薄口醤油', emoji: '🫘', category: '基本調味料', tablespoon: 18, teaspoon: 6, aliases: ['うすくちしょうゆ','淡口醤油','light soy sauce'] },
+  { name: 'たまり醤油', emoji: '🫘', category: '基本調味料', tablespoon: 18, teaspoon: 6, aliases: ['たまりしょうゆ','tamari'] },
+  { name: '味噌', emoji: '🍶', category: '基本調味料', tablespoon: 18, teaspoon: 6, aliases: ['みそ','ミソ','miso','合わせ味噌'], basic: true },
+  { name: '白味噌', emoji: '🍶', category: '基本調味料', tablespoon: 18, teaspoon: 6, aliases: ['しろみそ','西京味噌','white miso'] },
+  { name: '赤味噌', emoji: '🍶', category: '基本調味料', tablespoon: 18, teaspoon: 6, aliases: ['あかみそ','八丁味噌','red miso'] },
+  { name: '酢', emoji: '🍶', category: '基本調味料', tablespoon: 15, teaspoon: 5, aliases: ['す','vinegar','穀物酢'], basic: true },
+  { name: '米酢', emoji: '🍶', category: '基本調味料', tablespoon: 15, teaspoon: 5, aliases: ['こめず','よねず','rice vinegar'] },
+  { name: 'みりん', emoji: '🍶', category: '基本調味料', tablespoon: 18, teaspoon: 6, aliases: ['ミリン','味醂','mirin','本みりん'], basic: true },
+  { name: '料理酒', emoji: '🍶', category: '基本調味料', tablespoon: 15, teaspoon: 5, aliases: ['りょうりしゅ','cooking sake','調理酒'], basic: true },
+  { name: '白ワインビネガー', emoji: '🍷', category: '基本調味料', tablespoon: 15, teaspoon: 5, aliases: ['white wine vinegar'] },
+  { name: '赤ワインビネガー', emoji: '🍷', category: '基本調味料', tablespoon: 15, teaspoon: 5, aliases: ['red wine vinegar'] },
+  { name: 'バルサミコ酢', emoji: '🍷', category: '基本調味料', tablespoon: 16, teaspoon: 5, aliases: ['ばるさみこ','balsamic vinegar'] },
+
+  // ─── 油脂類 (18) ───
+  { name: 'サラダ油', emoji: '🫒', category: '油脂類', tablespoon: 12, teaspoon: 4, aliases: ['さらだあぶら','salad oil','植物油'], basic: true },
+  { name: 'オリーブオイル', emoji: '🫒', category: '油脂類', tablespoon: 12, teaspoon: 4, aliases: ['おりーぶおいる','olive oil','EXVオリーブオイル'], basic: true },
+  { name: 'ごま油', emoji: '🫒', category: '油脂類', tablespoon: 12, teaspoon: 4, aliases: ['ごまあぶら','sesame oil','胡麻油'], basic: true },
+  { name: 'バター', emoji: '🧈', category: '油脂類', tablespoon: 12, teaspoon: 4, aliases: ['ばたー','butter','有塩バター'], basic: true },
+  { name: '無塩バター', emoji: '🧈', category: '油脂類', tablespoon: 12, teaspoon: 4, aliases: ['むえんばたー','unsalted butter'] },
+  { name: 'マーガリン', emoji: '🧈', category: '油脂類', tablespoon: 12, teaspoon: 4, aliases: ['まーがりん','margarine'] },
+  { name: 'ココナッツオイル', emoji: '🥥', category: '油脂類', tablespoon: 12, teaspoon: 4, aliases: ['coconut oil'] },
+  { name: '太白ごま油', emoji: '🫒', category: '油脂類', tablespoon: 12, teaspoon: 4, aliases: ['たいはくごまあぶら'] },
+  { name: '亜麻仁油', emoji: '🫒', category: '油脂類', tablespoon: 12, teaspoon: 4, aliases: ['あまにゆ','あまにあぶら','flaxseed oil','フラックスシードオイル'] },
+  { name: 'えごま油', emoji: '🫒', category: '油脂類', tablespoon: 12, teaspoon: 4, aliases: ['えごまあぶら','perilla oil','荏胡麻油'] },
+  { name: 'ラード', emoji: '🐷', category: '油脂類', tablespoon: 12, teaspoon: 4, aliases: ['らーど','lard','豚脂'] },
+  { name: 'ショートニング', emoji: '🧈', category: '油脂類', tablespoon: 12, teaspoon: 4, aliases: ['しょーとにんぐ','shortening'] },
+  { name: '米油', emoji: '🌾', category: '油脂類', tablespoon: 12, teaspoon: 4, aliases: ['こめあぶら','rice bran oil'] },
+  { name: '菜種油', emoji: '🌻', category: '油脂類', tablespoon: 12, teaspoon: 4, aliases: ['なたねあぶら','キャノーラ油','canola oil'] },
+  { name: 'グレープシードオイル', emoji: '🍇', category: '油脂類', tablespoon: 12, teaspoon: 4, aliases: ['grapeseed oil'] },
+  { name: 'MCTオイル', emoji: '🫒', category: '油脂類', tablespoon: 12, teaspoon: 4, aliases: ['MCT oil'] },
+  { name: 'アボカドオイル', emoji: '🥑', category: '油脂類', tablespoon: 12, teaspoon: 4, aliases: ['avocado oil'] },
+  { name: 'ギー', emoji: '🧈', category: '油脂類', tablespoon: 12, teaspoon: 4, aliases: ['ぎー','ghee','澄ましバター'] },
+
+  // ─── 粉類 (22) ───
+  { name: '薄力粉', emoji: '🌾', category: '粉類', tablespoon: 9, teaspoon: 3, aliases: ['はくりきこ','小麦粉','cake flour','フラワー'], basic: true },
+  { name: '強力粉', emoji: '🌾', category: '粉類', tablespoon: 9, teaspoon: 3, aliases: ['きょうりきこ','bread flour','パン用粉'] },
+  { name: '中力粉', emoji: '🌾', category: '粉類', tablespoon: 9, teaspoon: 3, aliases: ['ちゅうりきこ','all-purpose flour','うどん粉'] },
+  { name: '片栗粉', emoji: '🥔', category: '粉類', tablespoon: 9, teaspoon: 3, aliases: ['かたくりこ','potato starch'], basic: true },
+  { name: 'コーンスターチ', emoji: '🌽', category: '粉類', tablespoon: 6, teaspoon: 2, aliases: ['こーんすたーち','cornstarch'] },
+  { name: 'パン粉', emoji: '🍞', category: '粉類', tablespoon: 3, teaspoon: 1, aliases: ['ぱんこ','panko','breadcrumbs'] },
+  { name: '米粉', emoji: '🌾', category: '粉類', tablespoon: 9, teaspoon: 3, aliases: ['こめこ','rice flour'] },
+  { name: 'そば粉', emoji: '🌾', category: '粉類', tablespoon: 9, teaspoon: 3, aliases: ['そばこ','蕎麦粉','buckwheat flour'] },
+  { name: 'タピオカ粉', emoji: '🧋', category: '粉類', tablespoon: 9, teaspoon: 3, aliases: ['たぴおかこ','tapioca starch'] },
+  { name: '全粒粉', emoji: '🌾', category: '粉類', tablespoon: 8, teaspoon: 3, aliases: ['ぜんりゅうふん','whole wheat flour'] },
+  { name: '上新粉', emoji: '🌾', category: '粉類', tablespoon: 9, teaspoon: 3, aliases: ['じょうしんこ'] },
+  { name: '白玉粉', emoji: '🍡', category: '粉類', tablespoon: 9, teaspoon: 3, aliases: ['しらたまこ','glutinous rice flour'] },
+  { name: 'もち粉', emoji: '🍡', category: '粉類', tablespoon: 9, teaspoon: 3, aliases: ['もちこ','mochiko'] },
+  { name: '天ぷら粉', emoji: '🍤', category: '粉類', tablespoon: 9, teaspoon: 3, aliases: ['てんぷらこ','tempura flour'] },
+  { name: 'きな粉', emoji: '🫘', category: '粉類', tablespoon: 7, teaspoon: 2, aliases: ['きなこ','soybean flour','黄粉'] },
+  { name: 'おからパウダー', emoji: '🫘', category: '粉類', tablespoon: 5, teaspoon: 2, aliases: ['おからぱうだー'] },
+  { name: '大豆粉', emoji: '🫘', category: '粉類', tablespoon: 6, teaspoon: 2, aliases: ['だいずこ','soy flour'] },
+  { name: '小麦胚芽', emoji: '🌾', category: '粉類', tablespoon: 8, teaspoon: 3, aliases: ['こむぎはいが','wheat germ'] },
+  { name: 'ホットケーキミックス', emoji: '🥞', category: '粉類', tablespoon: 9, teaspoon: 3, aliases: ['HM','ホケミ','pancake mix'] },
+  { name: 'セモリナ粉', emoji: '🌾', category: '粉類', tablespoon: 10, teaspoon: 3, aliases: ['せもりなこ','semolina'] },
+  { name: 'ココナッツフラワー', emoji: '🥥', category: '粉類', tablespoon: 7, teaspoon: 2, aliases: ['coconut flour'] },
+  { name: 'アーモンドフラワー', emoji: '🥜', category: '粉類', tablespoon: 6, teaspoon: 2, aliases: ['almond flour'] },
+
+  // ─── スパイス・ハーブ (28) ───
+  { name: 'コショウ', emoji: '🌶️', category: 'スパイス・ハーブ', tablespoon: 12, teaspoon: 4, aliases: ['こしょう','胡椒','pepper','ペッパー'], basic: true },
+  { name: '白コショウ', emoji: '🌶️', category: 'スパイス・ハーブ', tablespoon: 12, teaspoon: 4, aliases: ['しろこしょう','white pepper'] },
+  { name: '黒コショウ（粗挽き）', emoji: '🌶️', category: 'スパイス・ハーブ', tablespoon: 9, teaspoon: 3, aliases: ['くろこしょう','black pepper','ブラックペッパー'] },
+  { name: '一味唐辛子', emoji: '🌶️', category: 'スパイス・ハーブ', tablespoon: 6, teaspoon: 2, aliases: ['いちみとうがらし','chili powder','唐辛子'] },
+  { name: '七味唐辛子', emoji: '🌶️', category: 'スパイス・ハーブ', tablespoon: 6, teaspoon: 2, aliases: ['しちみとうがらし'] },
+  { name: 'カレー粉', emoji: '🍛', category: 'スパイス・ハーブ', tablespoon: 6, teaspoon: 2, aliases: ['かれーこ','curry powder'] },
+  { name: 'ターメリック', emoji: '🟡', category: 'スパイス・ハーブ', tablespoon: 9, teaspoon: 3, aliases: ['たーめりっく','turmeric','ウコン','うこん'] },
+  { name: 'パプリカパウダー', emoji: '🫑', category: 'スパイス・ハーブ', tablespoon: 9, teaspoon: 3, aliases: ['paprika'] },
+  { name: 'チリパウダー', emoji: '🌶️', category: 'スパイス・ハーブ', tablespoon: 9, teaspoon: 3, aliases: ['ちりぱうだー','chili powder'] },
+  { name: 'クミン（粉）', emoji: '🌿', category: 'スパイス・ハーブ', tablespoon: 6, teaspoon: 2, aliases: ['くみん','cumin'] },
+  { name: 'コリアンダー（粉）', emoji: '🌿', category: 'スパイス・ハーブ', tablespoon: 6, teaspoon: 2, aliases: ['こりあんだー','coriander','パクチーパウダー'] },
+  { name: 'ナツメグ', emoji: '🌰', category: 'スパイス・ハーブ', tablespoon: 9, teaspoon: 3, aliases: ['なつめぐ','nutmeg'] },
+  { name: 'シナモン（粉）', emoji: '🟤', category: 'スパイス・ハーブ', tablespoon: 9, teaspoon: 3, aliases: ['しなもん','cinnamon','桂皮'] },
+  { name: 'ガーリックパウダー', emoji: '🧄', category: 'スパイス・ハーブ', tablespoon: 9, teaspoon: 3, aliases: ['garlic powder','にんにくパウダー'] },
+  { name: 'オニオンパウダー', emoji: '🧅', category: 'スパイス・ハーブ', tablespoon: 9, teaspoon: 3, aliases: ['onion powder','玉ねぎパウダー'] },
+  { name: 'オレガノ（乾燥）', emoji: '🌿', category: 'スパイス・ハーブ', tablespoon: 3, teaspoon: 1, aliases: ['おれがの','oregano'] },
+  { name: 'バジル（乾燥）', emoji: '🌿', category: 'スパイス・ハーブ', tablespoon: 3, teaspoon: 1, aliases: ['ばじる','basil','乾燥バジル'] },
+  { name: 'パセリ（乾燥）', emoji: '🌿', category: 'スパイス・ハーブ', tablespoon: 3, teaspoon: 1, aliases: ['ぱせり','parsley','乾燥パセリ'] },
+  { name: 'ローズマリー（乾燥）', emoji: '🌿', category: 'スパイス・ハーブ', tablespoon: 3, teaspoon: 1, aliases: ['ろーずまりー','rosemary'] },
+  { name: 'タイム（乾燥）', emoji: '🌿', category: 'スパイス・ハーブ', tablespoon: 3, teaspoon: 1, aliases: ['たいむ','thyme'] },
+  { name: 'セージ（乾燥）', emoji: '🌿', category: 'スパイス・ハーブ', tablespoon: 3, teaspoon: 1, aliases: ['せーじ','sage'] },
+  { name: 'ディル（乾燥）', emoji: '🌿', category: 'スパイス・ハーブ', tablespoon: 3, teaspoon: 1, aliases: ['でぃる','dill'] },
+  { name: '山椒（粉）', emoji: '🌿', category: 'スパイス・ハーブ', tablespoon: 6, teaspoon: 2, aliases: ['さんしょう','Japanese pepper'] },
+  { name: 'わさび粉', emoji: '🟢', category: 'スパイス・ハーブ', tablespoon: 9, teaspoon: 3, aliases: ['wasabi powder'] },
+  { name: 'ガラムマサラ', emoji: '🍛', category: 'スパイス・ハーブ', tablespoon: 9, teaspoon: 3, aliases: ['がらむまさら','garam masala'] },
+  { name: '花椒（粉）', emoji: '🌿', category: 'スパイス・ハーブ', tablespoon: 6, teaspoon: 2, aliases: ['かしょう','ホアジャオ','Sichuan pepper'] },
+  { name: '五香粉', emoji: '🍛', category: 'スパイス・ハーブ', tablespoon: 9, teaspoon: 3, aliases: ['ごこうふん','ウーシャンフェン','five spice'] },
+  { name: 'カルダモン（粉）', emoji: '🌿', category: 'スパイス・ハーブ', tablespoon: 6, teaspoon: 2, aliases: ['かるだもん','cardamom'] },
+
+  // ─── 乳製品 (18) ───
+  { name: '牛乳', emoji: '🥛', category: '乳製品', tablespoon: 15, teaspoon: 5, aliases: ['ぎゅうにゅう','milk','ミルク'] },
+  { name: '低脂肪牛乳', emoji: '🥛', category: '乳製品', tablespoon: 15, teaspoon: 5, aliases: ['ていしぼうぎゅうにゅう','low-fat milk'] },
+  { name: '生クリーム', emoji: '🥛', category: '乳製品', tablespoon: 15, teaspoon: 5, aliases: ['なまくりーむ','heavy cream','ホイップ用'] },
+  { name: 'ヨーグルト', emoji: '🥛', category: '乳製品', tablespoon: 15, teaspoon: 5, aliases: ['よーぐると','yogurt'] },
+  { name: 'クリームチーズ', emoji: '🧀', category: '乳製品', tablespoon: 15, teaspoon: 5, aliases: ['くりーむちーず','cream cheese'] },
+  { name: '粉チーズ', emoji: '🧀', category: '乳製品', tablespoon: 6, teaspoon: 2, aliases: ['こなちーず','パルメザンチーズ','parmesan'] },
+  { name: 'サワークリーム', emoji: '🥛', category: '乳製品', tablespoon: 15, teaspoon: 5, aliases: ['さわーくりーむ','sour cream'] },
+  { name: '練乳', emoji: '🥛', category: '乳製品', tablespoon: 21, teaspoon: 7, aliases: ['れんにゅう','コンデンスミルク','condensed milk'] },
+  { name: 'エバミルク', emoji: '🥛', category: '乳製品', tablespoon: 15, teaspoon: 5, aliases: ['えばみるく','evaporated milk','無糖練乳'] },
+  { name: 'ホイップクリーム', emoji: '🍦', category: '乳製品', tablespoon: 5, teaspoon: 2, aliases: ['ほいっぷくりーむ','whipped cream'] },
+  { name: 'スキムミルク', emoji: '🥛', category: '乳製品', tablespoon: 6, teaspoon: 2, aliases: ['すきむみるく','脱脂粉乳','skim milk'] },
+  { name: '豆乳', emoji: '🥛', category: '乳製品', tablespoon: 15, teaspoon: 5, aliases: ['とうにゅう','soy milk'] },
+  { name: 'アーモンドミルク', emoji: '🥛', category: '乳製品', tablespoon: 15, teaspoon: 5, aliases: ['almond milk'] },
+  { name: 'オーツミルク', emoji: '🥛', category: '乳製品', tablespoon: 15, teaspoon: 5, aliases: ['oat milk'] },
+  { name: 'ココナッツミルク', emoji: '🥥', category: '乳製品', tablespoon: 15, teaspoon: 5, aliases: ['coconut milk'] },
+  { name: 'マスカルポーネ', emoji: '🧀', category: '乳製品', tablespoon: 15, teaspoon: 5, aliases: ['ますかるぽーね','mascarpone'] },
+  { name: 'カッテージチーズ', emoji: '🧀', category: '乳製品', tablespoon: 15, teaspoon: 5, aliases: ['かってーじちーず','cottage cheese'] },
+  { name: 'リコッタチーズ', emoji: '🧀', category: '乳製品', tablespoon: 15, teaspoon: 5, aliases: ['りこったちーず','ricotta'] },
+
+  // ─── 甘味料 (18) ───
+  { name: 'はちみつ', emoji: '🍯', category: '甘味料', tablespoon: 21, teaspoon: 7, aliases: ['蜂蜜','ハチミツ','honey'] },
+  { name: 'メープルシロップ', emoji: '🍁', category: '甘味料', tablespoon: 21, teaspoon: 7, aliases: ['めーぷるしろっぷ','maple syrup'] },
+  { name: '水あめ', emoji: '🍬', category: '甘味料', tablespoon: 21, teaspoon: 7, aliases: ['みずあめ','水飴','corn syrup'] },
+  { name: 'オリゴ糖', emoji: '🍯', category: '甘味料', tablespoon: 18, teaspoon: 6, aliases: ['おりごとう','oligosaccharide'] },
+  { name: 'アガベシロップ', emoji: '🌵', category: '甘味料', tablespoon: 21, teaspoon: 7, aliases: ['agave syrup'] },
+  { name: '黒蜜', emoji: '🍯', category: '甘味料', tablespoon: 21, teaspoon: 7, aliases: ['くろみつ'] },
+  { name: 'てんさい糖', emoji: '🍬', category: '甘味料', tablespoon: 9, teaspoon: 3, aliases: ['てんさいとう','甜菜糖','beet sugar'] },
+  { name: 'きび砂糖', emoji: '🍬', category: '甘味料', tablespoon: 9, teaspoon: 3, aliases: ['きびさとう','きび糖'] },
+  { name: '和三盆', emoji: '🍬', category: '甘味料', tablespoon: 9, teaspoon: 3, aliases: ['わさんぼん'] },
+  { name: 'ガムシロップ', emoji: '🧴', category: '甘味料', tablespoon: 18, teaspoon: 6, aliases: ['がむしろっぷ','simple syrup'] },
+  { name: 'ザラメ', emoji: '✨', category: '甘味料', tablespoon: 15, teaspoon: 5, aliases: ['ざらめ','ざらめ糖','粗目糖'] },
+  { name: '氷砂糖（砕き）', emoji: '💎', category: '甘味料', tablespoon: 12, teaspoon: 4, aliases: ['こおりざとう','rock sugar'] },
+  { name: 'ココナッツシュガー', emoji: '🥥', category: '甘味料', tablespoon: 9, teaspoon: 3, aliases: ['coconut sugar'] },
+  { name: '甘酒', emoji: '🍶', category: '甘味料', tablespoon: 18, teaspoon: 6, aliases: ['あまざけ','amazake'] },
+  { name: 'ラカント', emoji: '🍬', category: '甘味料', tablespoon: 13, teaspoon: 4, aliases: ['らかんと','羅漢果'] },
+  { name: 'ステビア', emoji: '🌿', category: '甘味料', tablespoon: 2, teaspoon: 1, aliases: ['すてびあ','stevia'] },
+  { name: 'トレハロース', emoji: '✨', category: '甘味料', tablespoon: 10, teaspoon: 3, aliases: ['とれはろーす','trehalose'] },
+  { name: '粉末黒糖', emoji: '🍬', category: '甘味料', tablespoon: 9, teaspoon: 3, aliases: ['ふんまつこくとう'] },
+
+  // ─── ソース・ドレッシング (24) ───
+  { name: 'マヨネーズ', emoji: '🥚', category: 'ソース・ドレッシング', tablespoon: 12, teaspoon: 4, aliases: ['まよねーず','mayo','mayonnaise'], basic: true },
+  { name: 'ケチャップ', emoji: '🍅', category: 'ソース・ドレッシング', tablespoon: 15, teaspoon: 5, aliases: ['けちゃっぷ','ketchup','トマトケチャップ'], basic: true },
+  { name: 'ソース（中濃）', emoji: '🥫', category: 'ソース・ドレッシング', tablespoon: 18, teaspoon: 6, aliases: ['ちゅうのうそーす','中濃ソース'] },
+  { name: 'ウスターソース', emoji: '🥫', category: 'ソース・ドレッシング', tablespoon: 18, teaspoon: 6, aliases: ['うすたーそーす','worcestershire sauce'] },
+  { name: 'お好みソース', emoji: '🥫', category: 'ソース・ドレッシング', tablespoon: 18, teaspoon: 6, aliases: ['おこのみそーす','okonomiyaki sauce'] },
+  { name: 'オイスターソース', emoji: '🦪', category: 'ソース・ドレッシング', tablespoon: 18, teaspoon: 6, aliases: ['おいすたーそーす','oyster sauce','牡蠣ソース'] },
+  { name: 'ポン酢', emoji: '🍊', category: 'ソース・ドレッシング', tablespoon: 18, teaspoon: 6, aliases: ['ぽんず','ponzu'] },
+  { name: 'タルタルソース', emoji: '🥚', category: 'ソース・ドレッシング', tablespoon: 12, teaspoon: 4, aliases: ['たるたるそーす','tartar sauce'] },
+  { name: 'バーベキューソース', emoji: '🥫', category: 'ソース・ドレッシング', tablespoon: 18, teaspoon: 6, aliases: ['BBQソース','barbecue sauce'] },
+  { name: 'デミグラスソース', emoji: '🥫', category: 'ソース・ドレッシング', tablespoon: 18, teaspoon: 6, aliases: ['でみぐらすそーす','demi-glace'] },
+  { name: 'トマトソース', emoji: '🍅', category: 'ソース・ドレッシング', tablespoon: 15, teaspoon: 5, aliases: ['とまとそーす','tomato sauce'] },
+  { name: 'トマトペースト', emoji: '🍅', category: 'ソース・ドレッシング', tablespoon: 18, teaspoon: 6, aliases: ['とまとぺーすと','tomato paste'] },
+  { name: '焼肉のタレ', emoji: '🥩', category: 'ソース・ドレッシング', tablespoon: 18, teaspoon: 6, aliases: ['やきにくのたれ','BBQたれ'] },
+  { name: 'すし酢', emoji: '🍣', category: 'ソース・ドレッシング', tablespoon: 15, teaspoon: 5, aliases: ['すしず','寿司酢','sushi vinegar'] },
+  { name: 'ごまドレッシング', emoji: '🥗', category: 'ソース・ドレッシング', tablespoon: 15, teaspoon: 5, aliases: ['ごまどれっしんぐ','sesame dressing'] },
+  { name: '和風ドレッシング', emoji: '🥗', category: 'ソース・ドレッシング', tablespoon: 15, teaspoon: 5, aliases: ['わふうどれっしんぐ','Japanese dressing'] },
+  { name: 'シーザードレッシング', emoji: '🥗', category: 'ソース・ドレッシング', tablespoon: 15, teaspoon: 5, aliases: ['しーざーどれっしんぐ','Caesar dressing'] },
+  { name: 'フレンチドレッシング', emoji: '🥗', category: 'ソース・ドレッシング', tablespoon: 15, teaspoon: 5, aliases: ['ふれんちどれっしんぐ','French dressing'] },
+  { name: 'マスタード', emoji: '🟡', category: 'ソース・ドレッシング', tablespoon: 15, teaspoon: 5, aliases: ['ますたーど','mustard','からし','洋からし'] },
+  { name: '粒マスタード', emoji: '🟡', category: 'ソース・ドレッシング', tablespoon: 15, teaspoon: 5, aliases: ['つぶますたーど','whole grain mustard'] },
+  { name: 'ホットソース', emoji: '🌶️', category: 'ソース・ドレッシング', tablespoon: 18, teaspoon: 6, aliases: ['ほっとそーす','hot sauce','タバスコ'] },
+  { name: 'ラー油', emoji: '🌶️', category: 'ソース・ドレッシング', tablespoon: 12, teaspoon: 4, aliases: ['らーゆ','辣油','chili oil'] },
+  { name: '食べるラー油', emoji: '🌶️', category: 'ソース・ドレッシング', tablespoon: 12, teaspoon: 4, aliases: ['たべるらーゆ'] },
+  { name: 'チリソース', emoji: '🌶️', category: 'ソース・ドレッシング', tablespoon: 18, teaspoon: 6, aliases: ['ちりそーす','chili sauce'] },
+
+  // ─── 穀物・豆類 (18) ───
+  { name: '白米', emoji: '🍚', category: '穀物・豆類', tablespoon: 12, teaspoon: 4, aliases: ['はくまい','うるち米','rice','お米'] },
+  { name: 'もち米', emoji: '🍚', category: '穀物・豆類', tablespoon: 12, teaspoon: 4, aliases: ['もちごめ','glutinous rice'] },
+  { name: '玄米', emoji: '🍚', category: '穀物・豆類', tablespoon: 12, teaspoon: 4, aliases: ['げんまい','brown rice'] },
+  { name: 'オートミール', emoji: '🥣', category: '穀物・豆類', tablespoon: 6, teaspoon: 2, aliases: ['おーとみーる','oatmeal','oats'] },
+  { name: '大豆（乾燥）', emoji: '🫘', category: '穀物・豆類', tablespoon: 12, teaspoon: 4, aliases: ['だいず','soybean'] },
+  { name: '小豆（乾燥）', emoji: '🫘', category: '穀物・豆類', tablespoon: 12, teaspoon: 4, aliases: ['あずき','azuki','red bean'] },
+  { name: 'レンズ豆', emoji: '🫘', category: '穀物・豆類', tablespoon: 12, teaspoon: 4, aliases: ['れんずまめ','lentil'] },
+  { name: 'ひよこ豆（乾燥）', emoji: '🫘', category: '穀物・豆類', tablespoon: 12, teaspoon: 4, aliases: ['ひよこまめ','chickpea','ガルバンゾー'] },
+  { name: '黒豆（乾燥）', emoji: '🫘', category: '穀物・豆類', tablespoon: 12, teaspoon: 4, aliases: ['くろまめ','black bean'] },
+  { name: 'キヌア', emoji: '🌾', category: '穀物・豆類', tablespoon: 12, teaspoon: 4, aliases: ['きぬあ','quinoa'] },
+  { name: '押し麦', emoji: '🌾', category: '穀物・豆類', tablespoon: 9, teaspoon: 3, aliases: ['おしむぎ','pressed barley'] },
+  { name: 'もち麦', emoji: '🌾', category: '穀物・豆類', tablespoon: 9, teaspoon: 3, aliases: ['もちむぎ'] },
+  { name: 'コーンミール', emoji: '🌽', category: '穀物・豆類', tablespoon: 9, teaspoon: 3, aliases: ['こーんみーる','cornmeal','ポレンタ'] },
+  { name: 'クスクス', emoji: '🌾', category: '穀物・豆類', tablespoon: 9, teaspoon: 3, aliases: ['くすくす','couscous'] },
+  { name: 'はと麦', emoji: '🌾', category: '穀物・豆類', tablespoon: 12, teaspoon: 4, aliases: ['はとむぎ','ヨクイニン'] },
+  { name: 'アマランサス', emoji: '🌾', category: '穀物・豆類', tablespoon: 12, teaspoon: 4, aliases: ['あまらんさす','amaranth'] },
+  { name: '雑穀ミックス', emoji: '🌾', category: '穀物・豆類', tablespoon: 10, teaspoon: 3, aliases: ['ざっこくみっくす','十六穀米'] },
+  { name: 'フラックスシード', emoji: '🌰', category: '穀物・豆類', tablespoon: 9, teaspoon: 3, aliases: ['ふらっくすしーど','亜麻仁','flaxseed'] },
+
+  // ─── ナッツ・種子 (18) ───
+  { name: 'すりごま', emoji: '🌰', category: 'ナッツ・種子', tablespoon: 6, teaspoon: 2, aliases: ['すりごま','ground sesame'] },
+  { name: 'いりごま', emoji: '🌰', category: 'ナッツ・種子', tablespoon: 9, teaspoon: 3, aliases: ['いりごま','炒りごま','roasted sesame'] },
+  { name: '練りごま', emoji: '🌰', category: 'ナッツ・種子', tablespoon: 18, teaspoon: 6, aliases: ['ねりごま','tahini','タヒニ','sesame paste'] },
+  { name: 'アーモンド（スライス）', emoji: '🥜', category: 'ナッツ・種子', tablespoon: 6, teaspoon: 2, aliases: ['あーもんどすらいす','sliced almonds'] },
+  { name: 'くるみ（刻み）', emoji: '🥜', category: 'ナッツ・種子', tablespoon: 6, teaspoon: 2, aliases: ['くるみ','胡桃','walnut'] },
+  { name: 'ピーナッツ（砕き）', emoji: '🥜', category: 'ナッツ・種子', tablespoon: 9, teaspoon: 3, aliases: ['ぴーなっつ','落花生','peanut'] },
+  { name: 'カシューナッツ（砕き）', emoji: '🥜', category: 'ナッツ・種子', tablespoon: 9, teaspoon: 3, aliases: ['かしゅーなっつ','cashew'] },
+  { name: 'ピスタチオ（砕き）', emoji: '🥜', category: 'ナッツ・種子', tablespoon: 8, teaspoon: 3, aliases: ['ぴすたちお','pistachio'] },
+  { name: 'マカダミアナッツ（砕き）', emoji: '🥜', category: 'ナッツ・種子', tablespoon: 9, teaspoon: 3, aliases: ['まかだみあなっつ','macadamia'] },
+  { name: 'ヘーゼルナッツ（砕き）', emoji: '🥜', category: 'ナッツ・種子', tablespoon: 8, teaspoon: 3, aliases: ['へーぜるなっつ','hazelnut'] },
+  { name: 'かぼちゃの種', emoji: '🎃', category: 'ナッツ・種子', tablespoon: 9, teaspoon: 3, aliases: ['かぼちゃのたね','pumpkin seeds','パンプキンシード'] },
+  { name: 'ひまわりの種', emoji: '🌻', category: 'ナッツ・種子', tablespoon: 9, teaspoon: 3, aliases: ['ひまわりのたね','sunflower seeds','サンフラワーシード'] },
+  { name: '松の実', emoji: '🌲', category: 'ナッツ・種子', tablespoon: 9, teaspoon: 3, aliases: ['まつのみ','pine nuts'] },
+  { name: 'チアシード', emoji: '🌰', category: 'ナッツ・種子', tablespoon: 9, teaspoon: 3, aliases: ['ちあしーど','chia seeds'] },
+  { name: 'ヘンプシード', emoji: '🌰', category: 'ナッツ・種子', tablespoon: 9, teaspoon: 3, aliases: ['へんぷしーど','hemp seeds','麻の実'] },
+  { name: 'ピーナッツバター', emoji: '🥜', category: 'ナッツ・種子', tablespoon: 16, teaspoon: 5, aliases: ['ぴーなっつばたー','peanut butter'] },
+  { name: 'アーモンドバター', emoji: '🥜', category: 'ナッツ・種子', tablespoon: 16, teaspoon: 5, aliases: ['あーもんどばたー','almond butter'] },
+  { name: 'アーモンドプードル', emoji: '🥜', category: 'ナッツ・種子', tablespoon: 6, teaspoon: 2, aliases: ['あーもんどぷーどる','almond powder','アーモンドパウダー'] },
+
+  // ─── 乾物 (18) ───
+  { name: 'かつお節', emoji: '🐟', category: '乾物', tablespoon: 2, teaspoon: 1, aliases: ['かつおぶし','鰹節','bonito flakes','けずりぶし'] },
+  { name: '煮干し（粉末）', emoji: '🐟', category: '乾物', tablespoon: 6, teaspoon: 2, aliases: ['にぼし','いりこ','小魚'] },
+  { name: '昆布（粉末）', emoji: '🌊', category: '乾物', tablespoon: 3, teaspoon: 1, aliases: ['こんぶ','kelp powder'] },
+  { name: '干しエビ', emoji: '🦐', category: '乾物', tablespoon: 5, teaspoon: 2, aliases: ['ほしえび','dried shrimp'] },
+  { name: '桜エビ', emoji: '🦐', category: '乾物', tablespoon: 3, teaspoon: 1, aliases: ['さくらえび','dried sakura shrimp'] },
+  { name: '青のり', emoji: '🌊', category: '乾物', tablespoon: 2, teaspoon: 1, aliases: ['あおのり','aonori','green laver'] },
+  { name: 'あおさ', emoji: '🌊', category: '乾物', tablespoon: 2, teaspoon: 1, aliases: ['アオサ','sea lettuce'] },
+  { name: '乾燥わかめ', emoji: '🌊', category: '乾物', tablespoon: 2, teaspoon: 1, aliases: ['かんそうわかめ','dried wakame'] },
+  { name: 'ひじき（乾燥）', emoji: '🌊', category: '乾物', tablespoon: 3, teaspoon: 1, aliases: ['ひじき','dried hijiki'] },
+  { name: '切り干し大根', emoji: '🌾', category: '乾物', tablespoon: 3, teaspoon: 1, aliases: ['きりぼしだいこん','dried daikon'] },
+  { name: '高野豆腐（粉末）', emoji: '🧊', category: '乾物', tablespoon: 5, teaspoon: 2, aliases: ['こうやどうふ','freeze-dried tofu'] },
+  { name: '麩（砕き）', emoji: '🍩', category: '乾物', tablespoon: 3, teaspoon: 1, aliases: ['ふ','お麩','wheat gluten'] },
+  { name: '春雨（乾燥・砕き）', emoji: '🍜', category: '乾物', tablespoon: 5, teaspoon: 2, aliases: ['はるさめ','glass noodles'] },
+  { name: 'とろろ昆布', emoji: '🌊', category: '乾物', tablespoon: 2, teaspoon: 1, aliases: ['とろろこんぶ','shaved kelp'] },
+  { name: '焼きのり（刻み）', emoji: '🌊', category: '乾物', tablespoon: 1, teaspoon: 0.5, aliases: ['やきのり','きざみのり','nori'] },
+  { name: '乾燥しいたけ（スライス）', emoji: '🍄', category: '乾物', tablespoon: 3, teaspoon: 1, aliases: ['かんそうしいたけ','干し椎茸','dried shiitake'] },
+  { name: '乾燥トマト（刻み）', emoji: '🍅', category: '乾物', tablespoon: 5, teaspoon: 2, aliases: ['ドライトマト','sun-dried tomato'] },
+  { name: 'フライドオニオン', emoji: '🧅', category: '乾物', tablespoon: 3, teaspoon: 1, aliases: ['ふらいどおにおん','fried onion'] },
+
+  // ─── エスニック・中華調味料 (22) ───
+  { name: 'ナンプラー', emoji: '🐟', category: 'エスニック・中華調味料', tablespoon: 18, teaspoon: 6, aliases: ['なんぷらー','fish sauce','魚醤','ニョクマム'] },
+  { name: '豆板醤', emoji: '🌶️', category: 'エスニック・中華調味料', tablespoon: 18, teaspoon: 6, aliases: ['とうばんじゃん','トウバンジャン','doubanjiang'] },
+  { name: 'コチュジャン', emoji: '🌶️', category: 'エスニック・中華調味料', tablespoon: 18, teaspoon: 6, aliases: ['こちゅじゃん','gochujang','韓国味噌'] },
+  { name: '甜麺醤', emoji: '🥫', category: 'エスニック・中華調味料', tablespoon: 18, teaspoon: 6, aliases: ['てんめんじゃん','テンメンジャン','sweet bean paste'] },
+  { name: 'XO醤', emoji: '🥫', category: 'エスニック・中華調味料', tablespoon: 15, teaspoon: 5, aliases: ['エックスオージャン','XO sauce'] },
+  { name: '豆鼓醤', emoji: '🫘', category: 'エスニック・中華調味料', tablespoon: 18, teaspoon: 6, aliases: ['とうちじゃん','black bean sauce'] },
+  { name: '芝麻醤', emoji: '🌰', category: 'エスニック・中華調味料', tablespoon: 15, teaspoon: 5, aliases: ['ちーまーじゃん','中華ごまペースト'] },
+  { name: 'サンバル', emoji: '🌶️', category: 'エスニック・中華調味料', tablespoon: 18, teaspoon: 6, aliases: ['さんばる','sambal','サンバルソース'] },
+  { name: 'スイートチリソース', emoji: '🌶️', category: 'エスニック・中華調味料', tablespoon: 18, teaspoon: 6, aliases: ['すいーとちりそーす','sweet chili sauce'] },
+  { name: 'ハリッサ', emoji: '🌶️', category: 'エスニック・中華調味料', tablespoon: 15, teaspoon: 5, aliases: ['はりっさ','harissa'] },
+  { name: 'シュリンプペースト', emoji: '🦐', category: 'エスニック・中華調味料', tablespoon: 18, teaspoon: 6, aliases: ['ガピ','カピ','shrimp paste'] },
+  { name: '花椒油', emoji: '🌿', category: 'エスニック・中華調味料', tablespoon: 12, teaspoon: 4, aliases: ['かしょうゆ','ホアジャオオイル','Sichuan oil'] },
+  { name: '柚子胡椒', emoji: '🍋', category: 'エスニック・中華調味料', tablespoon: 18, teaspoon: 6, aliases: ['ゆずこしょう','ゆずごしょう','yuzu pepper'] },
+  { name: '紹興酒', emoji: '🍶', category: 'エスニック・中華調味料', tablespoon: 15, teaspoon: 5, aliases: ['しょうこうしゅ','shaoxing wine'] },
+  { name: 'ココナッツアミノ', emoji: '🥥', category: 'エスニック・中華調味料', tablespoon: 15, teaspoon: 5, aliases: ['coconut aminos'] },
+  { name: 'タマリンドペースト', emoji: '🟤', category: 'エスニック・中華調味料', tablespoon: 18, teaspoon: 6, aliases: ['たまりんど','tamarind'] },
+  { name: 'チャツネ（マンゴー）', emoji: '🥭', category: 'エスニック・中華調味料', tablespoon: 18, teaspoon: 6, aliases: ['ちゃつね','mango chutney'] },
+  { name: 'サムジャン', emoji: '🥫', category: 'エスニック・中華調味料', tablespoon: 18, teaspoon: 6, aliases: ['さむじゃん','ssamjang'] },
+  { name: 'テンジャン', emoji: '🫘', category: 'エスニック・中華調味料', tablespoon: 18, teaspoon: 6, aliases: ['てんじゃん','doenjang','韓国味噌'] },
+  { name: 'ゴチュガル', emoji: '🌶️', category: 'エスニック・中華調味料', tablespoon: 6, teaspoon: 2, aliases: ['ごちゅがる','gochugaru','韓国唐辛子'] },
+  { name: '老抽', emoji: '🫘', category: 'エスニック・中華調味料', tablespoon: 18, teaspoon: 6, aliases: ['ろうちゅう','ラオチョウ','dark soy sauce','中国たまり醤油'] },
+  { name: 'カレーペースト', emoji: '🍛', category: 'エスニック・中華調味料', tablespoon: 16, teaspoon: 5, aliases: ['グリーンカレーペースト','レッドカレーペースト','Thai curry paste'] },
+
+  // ─── 製菓材料 (18) ───
+  { name: 'ベーキングパウダー', emoji: '💨', category: '製菓材料', tablespoon: 12, teaspoon: 4, aliases: ['べーきんぐぱうだー','BP','baking powder'] },
+  { name: '重曹', emoji: '🧪', category: '製菓材料', tablespoon: 12, teaspoon: 4, aliases: ['じゅうそう','baking soda','炭酸水素ナトリウム'] },
+  { name: 'ゼラチン（粉）', emoji: '🫧', category: '製菓材料', tablespoon: 9, teaspoon: 3, aliases: ['ぜらちん','gelatin','粉ゼラチン'] },
+  { name: 'ココアパウダー', emoji: '🍫', category: '製菓材料', tablespoon: 6, teaspoon: 2, aliases: ['ここあ','cocoa powder','純ココア'] },
+  { name: '抹茶パウダー', emoji: '🍵', category: '製菓材料', tablespoon: 6, teaspoon: 2, aliases: ['まっちゃ','matcha','抹茶粉'] },
+  { name: 'バニラエッセンス', emoji: '🌸', category: '製菓材料', tablespoon: 15, teaspoon: 5, aliases: ['ばにらえっせんす','vanilla extract'] },
+  { name: 'バニラオイル', emoji: '🌸', category: '製菓材料', tablespoon: 12, teaspoon: 4, aliases: ['ばにらおいる','vanilla oil'] },
+  { name: 'ラム酒', emoji: '🥃', category: '製菓材料', tablespoon: 15, teaspoon: 5, aliases: ['らむしゅ','rum','ダークラム'] },
+  { name: 'ブランデー', emoji: '🥃', category: '製菓材料', tablespoon: 15, teaspoon: 5, aliases: ['ぶらんでー','brandy'] },
+  { name: '粉寒天', emoji: '🫧', category: '製菓材料', tablespoon: 3, teaspoon: 1, aliases: ['こなかんてん','agar powder','アガー'] },
+  { name: 'ドライイースト', emoji: '🍞', category: '製菓材料', tablespoon: 9, teaspoon: 3, aliases: ['どらいいーすと','dry yeast','インスタントイースト'] },
+  { name: '製菓用チョコ（刻み）', emoji: '🍫', category: '製菓材料', tablespoon: 9, teaspoon: 3, aliases: ['チョコチップ','chocolate chips'] },
+  { name: 'ココナッツファイン', emoji: '🥥', category: '製菓材料', tablespoon: 5, teaspoon: 2, aliases: ['ここなっつふぁいん','desiccated coconut'] },
+  { name: 'レモン汁', emoji: '🍋', category: '製菓材料', tablespoon: 15, teaspoon: 5, aliases: ['れもんじる','lemon juice','レモン果汁'] },
+  { name: 'クエン酸', emoji: '🍋', category: '製菓材料', tablespoon: 12, teaspoon: 4, aliases: ['くえんさん','citric acid'] },
+  { name: 'コーンフラワー', emoji: '🌽', category: '製菓材料', tablespoon: 6, teaspoon: 2, aliases: ['こーんふらわー','corn flour'] },
+  { name: 'タピオカスターチ', emoji: '🧋', category: '製菓材料', tablespoon: 9, teaspoon: 3, aliases: ['たぴおかすたーち','tapioca starch'] },
+  { name: '食用色素', emoji: '🎨', category: '製菓材料', tablespoon: 9, teaspoon: 3, aliases: ['しょくようしきそ','food coloring','食紅'] },
+
+  // ─── 飲料・液体 (12) ───
+  { name: '水', emoji: '💧', category: '飲料・液体', tablespoon: 15, teaspoon: 5, aliases: ['みず','water'] },
+  { name: 'レモン果汁', emoji: '🍋', category: '飲料・液体', tablespoon: 15, teaspoon: 5, aliases: ['れもんかじゅう','ポッカレモン'] },
+  { name: 'ライム果汁', emoji: '🍈', category: '飲料・液体', tablespoon: 15, teaspoon: 5, aliases: ['らいむかじゅう','lime juice'] },
+  { name: 'ワイン（赤）', emoji: '🍷', category: '飲料・液体', tablespoon: 15, teaspoon: 5, aliases: ['あかわいん','red wine'] },
+  { name: 'ワイン（白）', emoji: '🍷', category: '飲料・液体', tablespoon: 15, teaspoon: 5, aliases: ['しろわいん','white wine'] },
+  { name: 'インスタントコーヒー', emoji: '☕', category: '飲料・液体', tablespoon: 6, teaspoon: 2, aliases: ['いんすたんとこーひー','instant coffee'] },
+  { name: '粉末緑茶', emoji: '🍵', category: '飲料・液体', tablespoon: 6, teaspoon: 2, aliases: ['ふんまつりょくちゃ','green tea powder'] },
+  { name: 'ミルクココア（粉末）', emoji: '☕', category: '飲料・液体', tablespoon: 6, teaspoon: 2, aliases: ['みるくここあ','hot chocolate mix'] },
+  { name: '柚子果汁', emoji: '🍋', category: '飲料・液体', tablespoon: 15, teaspoon: 5, aliases: ['ゆずかじゅう','yuzu juice'] },
+  { name: 'すだち果汁', emoji: '🍋', category: '飲料・液体', tablespoon: 15, teaspoon: 5, aliases: ['すだちかじゅう','sudachi juice'] },
+  { name: 'ココナッツウォーター', emoji: '🥥', category: '飲料・液体', tablespoon: 15, teaspoon: 5, aliases: ['coconut water'] },
+  { name: 'トマトジュース', emoji: '🍅', category: '飲料・液体', tablespoon: 15, teaspoon: 5, aliases: ['とまとじゅーす','tomato juice'] },
+
+  // ─── 生鮮食品 (15) ───
+  { name: 'にんにく（すりおろし）', emoji: '🧄', category: '生鮮食品', tablespoon: 15, teaspoon: 5, aliases: ['にんにくすりおろし','grated garlic','おろしにんにく'] },
+  { name: 'しょうが（すりおろし）', emoji: '🫚', category: '生鮮食品', tablespoon: 15, teaspoon: 5, aliases: ['しょうがすりおろし','grated ginger','おろししょうが'] },
+  { name: '大根おろし', emoji: '🥬', category: '生鮮食品', tablespoon: 15, teaspoon: 5, aliases: ['だいこんおろし','grated daikon'] },
+  { name: '玉ねぎ（みじん切り）', emoji: '🧅', category: '生鮮食品', tablespoon: 10, teaspoon: 3, aliases: ['たまねぎみじんぎり','diced onion'] },
+  { name: 'ねぎ（小口切り）', emoji: '🧅', category: '生鮮食品', tablespoon: 5, teaspoon: 2, aliases: ['ねぎ','小ねぎ','万能ねぎ','sliced green onion'] },
+  { name: 'トマト（角切り）', emoji: '🍅', category: '生鮮食品', tablespoon: 12, teaspoon: 4, aliases: ['とまとかくぎり','diced tomato'] },
+  { name: 'レモンの皮（すりおろし）', emoji: '🍋', category: '生鮮食品', tablespoon: 6, teaspoon: 2, aliases: ['れもんのかわ','lemon zest','レモンゼスト'] },
+  { name: 'ゆず皮（すりおろし）', emoji: '🍋', category: '生鮮食品', tablespoon: 6, teaspoon: 2, aliases: ['ゆずのかわ','yuzu zest'] },
+  { name: '溶き卵', emoji: '🥚', category: '生鮮食品', tablespoon: 15, teaspoon: 5, aliases: ['ときたまご','beaten egg'] },
+  { name: '卵白', emoji: '🥚', category: '生鮮食品', tablespoon: 15, teaspoon: 5, aliases: ['らんぱく','egg white'] },
+  { name: '卵黄', emoji: '🥚', category: '生鮮食品', tablespoon: 18, teaspoon: 6, aliases: ['らんおう','egg yolk'] },
+  { name: '豆腐（崩し）', emoji: '🧊', category: '生鮮食品', tablespoon: 15, teaspoon: 5, aliases: ['とうふ','tofu','mashed tofu'] },
+  { name: 'みょうが（刻み）', emoji: '🌸', category: '生鮮食品', tablespoon: 5, teaspoon: 2, aliases: ['みょうが','myoga'] },
+  { name: '大葉（刻み）', emoji: '🌿', category: '生鮮食品', tablespoon: 2, teaspoon: 1, aliases: ['おおば','しそ','紫蘇','shiso','青じそ'] },
+  { name: 'パクチー（刻み）', emoji: '🌿', category: '生鮮食品', tablespoon: 3, teaspoon: 1, aliases: ['ぱくちー','コリアンダー生','coriander','cilantro','香菜'] },
+
+  // ─── だし・スープの素 (16) ───
+  { name: 'めんつゆ', emoji: '🍜', category: 'だし・スープの素', tablespoon: 18, teaspoon: 6, aliases: ['めんつゆ','麺つゆ','tsuyu'], basic: true },
+  { name: '白だし', emoji: '🍶', category: 'だし・スープの素', tablespoon: 18, teaspoon: 6, aliases: ['しろだし','white dashi'] },
+  { name: '顆粒だし', emoji: '🐟', category: 'だし・スープの素', tablespoon: 9, teaspoon: 3, aliases: ['かりゅうだし','ほんだし','granulated dashi','だしの素'], basic: true },
+  { name: '鶏がらスープの素', emoji: '🐔', category: 'だし・スープの素', tablespoon: 9, teaspoon: 3, aliases: ['とりがら','chicken stock powder','鶏ガラ'] },
+  { name: 'コンソメ（顆粒）', emoji: '🥣', category: 'だし・スープの素', tablespoon: 9, teaspoon: 3, aliases: ['こんそめ','consomme','コンソメスープの素'] },
+  { name: 'コンソメ（キューブ）', emoji: '🥣', category: 'だし・スープの素', tablespoon: 9, teaspoon: 3, aliases: ['こんそめきゅーぶ','bouillon cube','固形コンソメ'] },
+  { name: '昆布だし（顆粒）', emoji: '🌊', category: 'だし・スープの素', tablespoon: 6, teaspoon: 2, aliases: ['こんぶだし','kelp dashi'] },
+  { name: 'いりこだし', emoji: '🐟', category: 'だし・スープの素', tablespoon: 6, teaspoon: 2, aliases: ['いりこだし','煮干しだし','niboshi dashi'] },
+  { name: 'かつおだし（顆粒）', emoji: '🐟', category: 'だし・スープの素', tablespoon: 6, teaspoon: 2, aliases: ['かつおだし','bonito dashi'] },
+  { name: 'しいたけだし（顆粒）', emoji: '🍄', category: 'だし・スープの素', tablespoon: 6, teaspoon: 2, aliases: ['しいたけだし','shiitake dashi'] },
+  { name: 'ビーフブイヨン', emoji: '🥩', category: 'だし・スープの素', tablespoon: 9, teaspoon: 3, aliases: ['びーふぶいよん','beef bouillon'] },
+  { name: '中華だし', emoji: '🥡', category: 'だし・スープの素', tablespoon: 9, teaspoon: 3, aliases: ['ちゅうかだし','中華スープの素'] },
+  { name: 'ウェイパー', emoji: '🥡', category: 'だし・スープの素', tablespoon: 15, teaspoon: 5, aliases: ['うぇいぱー','味覇'] },
+  { name: '創味シャンタン', emoji: '🥡', category: 'だし・スープの素', tablespoon: 15, teaspoon: 5, aliases: ['そうみしゃんたん'] },
+  { name: 'だし醤油', emoji: '🐟', category: 'だし・スープの素', tablespoon: 18, teaspoon: 6, aliases: ['だししょうゆ','だし入り醤油'] },
+  { name: 'ほんだし', emoji: '🐟', category: 'だし・スープの素', tablespoon: 9, teaspoon: 3, aliases: ['本だし'] },
+
+  // ─── チューブ調味料 (12) ───
+  { name: 'にんにく（チューブ）', emoji: '🧄', category: 'チューブ調味料', tablespoon: 15, teaspoon: 5, aliases: ['にんにくちゅーぶ','おろしにんにくチューブ','garlic paste'] },
+  { name: 'しょうが（チューブ）', emoji: '🫚', category: 'チューブ調味料', tablespoon: 15, teaspoon: 5, aliases: ['しょうがちゅーぶ','おろししょうがチューブ','ginger paste'] },
+  { name: 'わさび（チューブ）', emoji: '🟢', category: 'チューブ調味料', tablespoon: 15, teaspoon: 5, aliases: ['わさびちゅーぶ','ワサビ','wasabi paste'] },
+  { name: 'からし（チューブ）', emoji: '🟡', category: 'チューブ調味料', tablespoon: 15, teaspoon: 5, aliases: ['からしちゅーぶ','練りからし','Japanese mustard'] },
+  { name: '柚子こしょう（チューブ）', emoji: '🍋', category: 'チューブ調味料', tablespoon: 15, teaspoon: 5, aliases: ['ゆずこしょう','ゆずごしょう'] },
+  { name: '梅肉（チューブ）', emoji: '🌸', category: 'チューブ調味料', tablespoon: 15, teaspoon: 5, aliases: ['ばいにく','梅ペースト','ume paste','ねり梅'] },
+  { name: 'アンチョビペースト', emoji: '🐟', category: 'チューブ調味料', tablespoon: 15, teaspoon: 5, aliases: ['あんちょびぺーすと','anchovy paste'] },
+  { name: 'バジルペースト', emoji: '🌿', category: 'チューブ調味料', tablespoon: 12, teaspoon: 4, aliases: ['ばじるぺーすと','basil paste','ジェノベーゼ'] },
+  { name: 'もみじおろし（チューブ）', emoji: '🌶️', category: 'チューブ調味料', tablespoon: 15, teaspoon: 5, aliases: ['もみじおろし','紅葉おろし'] },
+  { name: '味噌（チューブ）', emoji: '🍶', category: 'チューブ調味料', tablespoon: 18, teaspoon: 6, aliases: ['みそちゅーぶ'] },
+  { name: 'にんにく味噌', emoji: '🧄', category: 'チューブ調味料', tablespoon: 18, teaspoon: 6, aliases: ['にんにくみそ'] },
+  { name: 'ゆず（チューブ）', emoji: '🍋', category: 'チューブ調味料', tablespoon: 15, teaspoon: 5, aliases: ['ゆずちゅーぶ','ゆずペースト'] },
+
+  // ─── その他 (13) ───
+  { name: '天かす', emoji: '🍤', category: 'その他', tablespoon: 3, teaspoon: 1, aliases: ['てんかす','揚げ玉','tenkasu'] },
+  { name: '塩昆布（刻み）', emoji: '🌊', category: 'その他', tablespoon: 5, teaspoon: 2, aliases: ['しおこんぶ','塩こんぶ'] },
+  { name: 'ふりかけ', emoji: '🍚', category: 'その他', tablespoon: 5, teaspoon: 2, aliases: ['furikake'] },
+  { name: 'ゆかり', emoji: '🌸', category: 'その他', tablespoon: 5, teaspoon: 2, aliases: ['しそふりかけ'] },
+  { name: 'ごま塩', emoji: '🧂', category: 'その他', tablespoon: 12, teaspoon: 4, aliases: ['ごましお','gomashio'] },
+  { name: '味の素', emoji: '✨', category: 'その他', tablespoon: 12, teaspoon: 4, aliases: ['あじのもと','MSG','うま味調味料'] },
+  { name: 'プロテインパウダー', emoji: '💪', category: 'その他', tablespoon: 8, teaspoon: 3, aliases: ['ぷろていん','protein powder'] },
+  { name: 'コラーゲンパウダー', emoji: '✨', category: 'その他', tablespoon: 6, teaspoon: 2, aliases: ['こらーげん','collagen powder'] },
+  { name: '酒粕', emoji: '🍶', category: 'その他', tablespoon: 15, teaspoon: 5, aliases: ['さけかす','sake lees'] },
+  { name: '塩麹', emoji: '🧂', category: 'その他', tablespoon: 18, teaspoon: 6, aliases: ['しおこうじ','shio koji','塩こうじ'] },
+  { name: '醤油麹', emoji: '🫘', category: 'その他', tablespoon: 18, teaspoon: 6, aliases: ['しょうゆこうじ','醤油こうじ'] },
+  { name: '甘酒の素', emoji: '🍶', category: 'その他', tablespoon: 18, teaspoon: 6, aliases: ['あまざけのもと'] },
+  { name: '粉末甘酒', emoji: '🍶', category: 'その他', tablespoon: 6, teaspoon: 2, aliases: ['ふんまつあまざけ'] },
+];
+
+// ══════════════════════════════════════════
+// ── Favorites (localStorage) ──
+// ══════════════════════════════════════════
+const FAV_KEY = 'saji-gram-favorites';
+
+function getFavorites() {
+  try { return JSON.parse(localStorage.getItem(FAV_KEY)) || []; }
+  catch { return []; }
+}
+
+function saveFavorites(favs) {
+  localStorage.setItem(FAV_KEY, JSON.stringify(favs));
+}
+
+function isFavorite(name) {
+  return getFavorites().includes(name);
+}
+
+function toggleFavorite(name) {
+  const favs = getFavorites();
+  const idx = favs.indexOf(name);
+  if (idx >= 0) favs.splice(idx, 1);
+  else favs.push(name);
+  saveFavorites(favs);
+}
+
+// ══════════════════════════════════════════
+// ── Search Utilities ──
+// ══════════════════════════════════════════
+function toHiragana(str) {
+  return str.replace(/[\u30A1-\u30F6]/g, ch =>
+    String.fromCharCode(ch.charCodeAt(0) - 0x60)
+  );
+}
+
+function normalizeForSearch(str) {
+  return toHiragana(str).toLowerCase();
+}
+
+function searchIngredients(query) {
+  if (!query) return [];
+  const norm = normalizeForSearch(query);
+  return ingredients.filter(ing => {
+    if (normalizeForSearch(ing.name).includes(norm)) return true;
+    if (normalizeForSearch(ing.category).includes(norm)) return true;
+    if (ing.aliases) {
+      for (const a of ing.aliases) {
+        if (normalizeForSearch(a).includes(norm)) return true;
+      }
+    }
+    return false;
+  });
+}
+
+// ══════════════════════════════════════════
 // ── State ──
-let activeCategory = 'すべて';
+// ══════════════════════════════════════════
+let activeCategory = null;
 let selectedIngredient = null;
 let selectedSpoon = 'tablespoon';
 let quantity = 1;
 
-const categories = ['すべて', ...new Set(ingredients.map(i => i.category))];
-
-// ── DOM ──
+// ══════════════════════════════════════════
+// ── DOM References ──
+// ══════════════════════════════════════════
 const searchInput = document.getElementById('searchInput');
 const searchClear = document.getElementById('searchClear');
 const categoryScroll = document.getElementById('categoryScroll');
-const ingredientGrid = document.getElementById('ingredientGrid');
+const ingredientSections = document.getElementById('ingredientSections');
 const emptyState = document.getElementById('emptyState');
 const resultPanel = document.getElementById('resultPanel');
 const backdrop = document.getElementById('backdrop');
 const resultEmoji = document.getElementById('resultEmoji');
 const resultName = document.getElementById('resultName');
+const resultFav = document.getElementById('resultFav');
 const resultClose = document.getElementById('resultClose');
 const spoonSelector = document.getElementById('spoonSelector');
 const qtyNumber = document.getElementById('qtyNumber');
@@ -786,66 +1155,94 @@ const qtyPlus = document.getElementById('qtyPlus');
 const gramValue = document.getElementById('gramValue');
 const gramResult = document.getElementById('gramResult');
 
-// ── Render Categories ──
-function renderCategories() {
-  categoryScroll.innerHTML = categories.map(cat => 
-    `<button class="chip${cat === activeCategory ? ' active' : ''}" data-cat="${cat}">${cat}</button>`
-  ).join('');
-}
-
-// ── Render Ingredients ──
-function renderIngredients() {
-  const query = searchInput.value.trim().toLowerCase();
-  let filtered = ingredients;
-
-  if (query) {
-    filtered = filtered.filter(i => 
-      i.name.toLowerCase().includes(query) || i.category.toLowerCase().includes(query)
-    );
-  } else if (activeCategory !== 'すべて') {
-    filtered = filtered.filter(i => i.category === activeCategory);
-  }
-
-  if (filtered.length === 0) {
-    ingredientGrid.innerHTML = '';
-    emptyState.style.display = 'block';
-    return;
-  }
-
-  emptyState.style.display = 'none';
-  ingredientGrid.innerHTML = filtered.map(ing => 
-    `<div class="ingredient-card${selectedIngredient && selectedIngredient.name === ing.name ? ' selected' : ''}" data-name="${ing.name}">
-      <span class="card-emoji">${ing.emoji}</span>
-      <div class="card-name">${ing.name}</div>
-      <div class="card-sub">大さじ1 = ${ing.tablespoon}g</div>
-    </div>`
-  ).join('');
-}
-
-// ── Spoon Label Map ──
+// ══════════════════════════════════════════
+// ── Rendering ──
+// ══════════════════════════════════════════
 const spoonLabels = {
   tablespoon: '大さじ',
   mediumspoon: '中さじ',
   teaspoon: '小さじ'
 };
 
-// ── Calculate Grams ──
+function renderCategories() {
+  categoryScroll.innerHTML = CATEGORIES.map(cat =>
+    `<button class="chip${activeCategory === cat ? ' active' : ''}" data-cat="${cat}">${cat}</button>`
+  ).join('');
+}
+
+function renderCard(ing) {
+  const fav = isFavorite(ing.name);
+  const sel = selectedIngredient && selectedIngredient.name === ing.name;
+  return `<div class="ingredient-card${sel ? ' selected' : ''}" data-name="${ing.name}">
+    <button class="fav-btn${fav ? ' active' : ''}" data-name="${ing.name}" aria-label="お気に入り">${fav ? '♥' : '♡'}</button>
+    <span class="card-emoji">${ing.emoji}</span>
+    <div class="card-name">${ing.name}</div>
+    <div class="card-sub">大さじ1 = ${ing.tablespoon}g</div>
+  </div>`;
+}
+
+function renderSection(title, emoji, items) {
+  if (!items || items.length === 0) return '';
+  return `<div class="ingredient-section">
+    <div class="section-header">
+      <span class="section-emoji">${emoji}</span>
+      <span class="section-title">${title}</span>
+      <span class="section-count">${items.length}品</span>
+    </div>
+    <div class="ingredient-grid">
+      ${items.map(ing => renderCard(ing)).join('')}
+    </div>
+  </div>`;
+}
+
+function renderView() {
+  const query = searchInput.value.trim();
+
+  if (query) {
+    // ── Search mode ──
+    const results = searchIngredients(query);
+    if (results.length === 0) {
+      ingredientSections.innerHTML = '';
+      emptyState.style.display = 'block';
+    } else {
+      emptyState.style.display = 'none';
+      ingredientSections.innerHTML = renderSection('検索結果', '🔍', results);
+    }
+  } else if (activeCategory) {
+    // ── Category mode ──
+    const items = ingredients.filter(i => i.category === activeCategory);
+    emptyState.style.display = 'none';
+    ingredientSections.innerHTML = renderSection(activeCategory, '', items);
+  } else {
+    // ── Home mode ──
+    const favNames = getFavorites();
+    const favItems = favNames.map(n => ingredients.find(i => i.name === n)).filter(Boolean);
+    const basicItems = ingredients.filter(i => i.basic);
+
+    let html = '';
+    if (favItems.length > 0) {
+      html += renderSection('お気に入り', '❤️', favItems);
+    }
+    html += renderSection('基本調味料', '🧂', basicItems);
+
+    ingredientSections.innerHTML = html;
+    emptyState.style.display = 'none';
+  }
+}
+
+// ══════════════════════════════════════════
+// ── Result Panel ──
+// ══════════════════════════════════════════
 function getGrams(ing, spoon, qty) {
   let baseGram;
   if (spoon === 'tablespoon') baseGram = ing.tablespoon;
   else if (spoon === 'teaspoon') baseGram = ing.teaspoon;
-  else baseGram = Math.round((ing.tablespoon + ing.teaspoon) / 2 * 10) / 10; // mediumspoon ≈ average
-
-  // More accurate: mediumspoon (10ml) = tablespoon * (10/15)
-  if (spoon === 'mediumspoon') {
-    baseGram = Math.round(ing.tablespoon * (10 / 15) * 10) / 10;
-  }
+  else baseGram = Math.round(ing.tablespoon * (10 / 15) * 10) / 10;
 
   const total = baseGram * qty;
   return Number.isInteger(total) ? total : Math.round(total * 10) / 10;
 }
 
-// ── Update Result ──
 function updateResult() {
   if (!selectedIngredient) return;
   const grams = getGrams(selectedIngredient, selectedSpoon, quantity);
@@ -854,13 +1251,18 @@ function updateResult() {
   qtyUnit.textContent = spoonLabels[selectedSpoon];
   qtyMinus.disabled = quantity <= 0.5;
 
-  // Pulse animation
   gramResult.classList.remove('pulse');
-  void gramResult.offsetWidth; // force reflow
+  void gramResult.offsetWidth;
   gramResult.classList.add('pulse');
 }
 
-// ── Open Result Panel ──
+function updateResultFavBtn() {
+  if (!selectedIngredient) return;
+  const fav = isFavorite(selectedIngredient.name);
+  resultFav.textContent = fav ? '♥' : '♡';
+  resultFav.classList.toggle('active', fav);
+}
+
 function openPanel(ing) {
   selectedIngredient = ing;
   selectedSpoon = 'tablespoon';
@@ -869,36 +1271,38 @@ function openPanel(ing) {
   resultEmoji.textContent = ing.emoji;
   resultName.textContent = ing.name;
 
-  // Reset spoon buttons
   spoonSelector.querySelectorAll('.spoon-btn').forEach(btn => {
     btn.classList.toggle('active', btn.dataset.spoon === 'tablespoon');
   });
 
   updateResult();
+  updateResultFavBtn();
   resultPanel.classList.add('visible');
   backdrop.classList.add('visible');
-  renderIngredients(); // show selected state
+  renderView();
 }
 
-// ── Close Result Panel ──
 function closePanel() {
   resultPanel.classList.remove('visible');
   backdrop.classList.remove('visible');
   selectedIngredient = null;
-  renderIngredients();
+  renderView();
 }
 
+// ══════════════════════════════════════════
 // ── Event Listeners ──
+// ══════════════════════════════════════════
 
-// Category chips
+// Category chips (toggle)
 categoryScroll.addEventListener('click', e => {
   const chip = e.target.closest('.chip');
   if (!chip) return;
-  activeCategory = chip.dataset.cat;
+  const cat = chip.dataset.cat;
+  activeCategory = (activeCategory === cat) ? null : cat;
   searchInput.value = '';
   searchClear.classList.remove('visible');
   renderCategories();
-  renderIngredients();
+  renderView();
 });
 
 // Search
@@ -906,25 +1310,44 @@ searchInput.addEventListener('input', () => {
   const hasValue = searchInput.value.trim().length > 0;
   searchClear.classList.toggle('visible', hasValue);
   if (hasValue) {
-    activeCategory = 'すべて';
+    activeCategory = null;
     renderCategories();
   }
-  renderIngredients();
+  renderView();
 });
 
 searchClear.addEventListener('click', () => {
   searchInput.value = '';
   searchClear.classList.remove('visible');
   searchInput.focus();
-  renderIngredients();
+  renderView();
 });
 
-// Ingredient selection
-ingredientGrid.addEventListener('click', e => {
+// Ingredient card click & favorite button (event delegation)
+ingredientSections.addEventListener('click', e => {
+  // Favorite button
+  const favBtn = e.target.closest('.fav-btn');
+  if (favBtn) {
+    e.stopPropagation();
+    toggleFavorite(favBtn.dataset.name);
+    renderView();
+    if (selectedIngredient) updateResultFavBtn();
+    return;
+  }
+
+  // Card click
   const card = e.target.closest('.ingredient-card');
   if (!card) return;
   const ing = ingredients.find(i => i.name === card.dataset.name);
   if (ing) openPanel(ing);
+});
+
+// Result panel favorite
+resultFav.addEventListener('click', () => {
+  if (!selectedIngredient) return;
+  toggleFavorite(selectedIngredient.name);
+  updateResultFavBtn();
+  renderView();
 });
 
 // Close panel
@@ -936,7 +1359,7 @@ spoonSelector.addEventListener('click', e => {
   const btn = e.target.closest('.spoon-btn');
   if (!btn) return;
   selectedSpoon = btn.dataset.spoon;
-  spoonSelector.querySelectorAll('.spoon-btn').forEach(b => 
+  spoonSelector.querySelectorAll('.spoon-btn').forEach(b =>
     b.classList.toggle('active', b === btn)
   );
   updateResult();
@@ -957,18 +1380,20 @@ qtyPlus.addEventListener('click', () => {
 
 // Prevent zoom on input focus (iOS)
 searchInput.addEventListener('focus', () => {
-  document.querySelector('meta[name="viewport"]').setAttribute('content', 
+  document.querySelector('meta[name="viewport"]').setAttribute('content',
     'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no');
 });
 
 searchInput.addEventListener('blur', () => {
-  document.querySelector('meta[name="viewport"]').setAttribute('content', 
+  document.querySelector('meta[name="viewport"]').setAttribute('content',
     'width=device-width, initial-scale=1.0, user-scalable=no');
 });
 
+// ══════════════════════════════════════════
 // ── Initialize ──
+// ══════════════════════════════════════════
 renderCategories();
-renderIngredients();
+renderView();
 </script>
 
 </body>
